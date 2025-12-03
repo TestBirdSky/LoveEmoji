@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scorpio"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_detail"
+    tools:context=".ScorpioSingle">
+
+    <!-- Top Bar -->
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_direction" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Ghost 1"
+            android:textColor="#FF222222"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="32dp"
+            android:layout_height="32dp" />
+    </LinearLayout>
+
+    <!-- Timer and Loop Controls -->
+    <LinearLayout
+        android:id="@+id/controlsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/topBar">
+
+        <!-- Timer Section -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Timer"
+                android:textColor="#FF222222"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_timer_off"
+                android:paddingHorizontal="22dp"
+                android:paddingVertical="8dp"
+                android:text="off"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Loop Section -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end|center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Loop"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchLoop"
+                android:layout_width="56dp"
+                android:layout_height="32dp"
+                android:checked="false"
+                android:thumb="@drawable/switch_thumb"
+                app:track="@drawable/switch_track"
+                app:showText="false"
+                app:thumbTint="@null"
+                app:trackTint="@null"
+                app:switchMinWidth="56dp"
+                app:switchPadding="0dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Audio Display Circle -->
+    <FrameLayout
+        android:id="@+id/audioCircle"
+        android:layout_width="262dp"
+        android:layout_height="262dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/controlsLayout">
+
+        <!-- Ripple Circle 1 -->
+        <View
+            android:id="@+id/rippleCircle1"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ripple_circle_1"
+            android:alpha="0"
+            android:visibility="gone" />
+
+        <!-- Ripple Circle 2 -->
+        <View
+            android:id="@+id/rippleCircle2"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ripple_circle_2"
+            android:alpha="0"
+            android:visibility="gone" />
+
+        <FrameLayout
+            android:id="@+id/btnPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_play_circle"
+            tools:ignore="UselessParent">
+
+            <ImageView
+                android:id="@+id/imgPlayStop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:elevation="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_play" />
+
+            <ImageView
+                android:id="@+id/imgAudio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_ghost_1" />
+
+
+        </FrameLayout>
+        <View
+            android:id="@+id/rippleCircle0"
+            android:layout_width="210dp"
+            android:layout_height="210dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ripple_circle_0"/>
+    </FrameLayout>
+
+    <!-- Instruction Text -->
+    <TextView
+        android:id="@+id/tvInstruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="12dp"
+        android:text="Click the button to make a\ncontinuous sound"
+        android:textColor="#AAAAAA"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/audioCircle" />
+
+    <!-- Volume Control -->
+    <LinearLayout
+        android:id="@+id/volumeControl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="24dp"
+        app:layout_constraintTop_toBottomOf="@id/tvInstruction"
+        app:layout_constraintVertical_bias="0.3">
+
+        <ImageView
+            android:id="@+id/imgVolumeOff"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:contentDescription="Volume Off"
+            android:src="@drawable/ic_volume_off" />
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="16dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bg_seek"
+            android:padding="4dp">
+            <SeekBar
+                android:id="@+id/seekBarVolume"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:max="100"
+                android:progress="50"
+                android:progressDrawable="@drawable/seekbar_progress_layer"
+                android:thumb="@drawable/seekbar_thumb"
+                android:thumbOffset="0dp"
+                android:splitTrack="false"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp" />
+        </FrameLayout>
+
+
+        <ImageView
+            android:id="@+id/imgVolumeOn"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:contentDescription="Volume On"
+            android:src="@drawable/icon_volume_on" />
+    </LinearLayout>
+
+    <!-- Timer Options Dropdown (Floating) -->
+    <LinearLayout
+        android:id="@+id/timerOptionsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/bg_timer_dropdown"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        android:elevation="12dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/controlsLayout">
+
+        <TextView
+            android:id="@+id/timer5s"
+            android:layout_width="96dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_timer_option_top"
+            android:gravity="center"
+            android:paddingHorizontal="12dp"
+            android:text="5s"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#1A000000" />
+
+        <TextView
+            android:id="@+id/timer10s"
+            android:layout_width="96dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_timer_option"
+            android:gravity="center"
+            android:paddingHorizontal="12dp"
+            android:text="10s"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#1A000000" />
+
+        <TextView
+            android:id="@+id/timer15s"
+            android:layout_width="96dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_timer_option"
+            android:gravity="center"
+            android:paddingHorizontal="12dp"
+            android:text="15s"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#1A000000" />
+
+        <TextView
+            android:id="@+id/timer20s"
+            android:layout_width="96dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_timer_option"
+            android:gravity="center"
+            android:paddingHorizontal="12dp"
+            android:text="20s"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#1A000000" />
+
+        <TextView
+            android:id="@+id/timerOff"
+            android:layout_width="96dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_timer_option_bottom"
+            android:gravity="center"
+            android:paddingHorizontal="12dp"
+            android:text="off"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

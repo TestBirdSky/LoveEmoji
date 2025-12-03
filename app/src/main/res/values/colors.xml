@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- Libra Single Colors -->
+    <color name="red_primary">#FF6B6B</color>
+    <color name="background_pink">#FFEEEAE6</color>
+    <color name="tab_selected">#FF615A</color>
+    <color name="tab_unselected">#AD7A78</color>
+    
+    <!-- Item Card Colors -->
+    <color name="card_yellow">#FFDA92</color>
+    <color name="card_blue">#92BDFF</color>
+    <color name="card_purple">#AD92FF</color>
+    <color name="card_pink_light">#FF9090</color>
+    <color name="card_pink_magenta">#FF90E7</color>
+    <color name="card_green">#8BEC87</color>
+
+    <color name="card_yellow_f">#FFECC9</color>
+    <color name="card_blue_f">#DFECFF</color>
+    <color name="card_purple_f">#E7DFFF</color>
+    <color name="card_pink_light_f">#FFC8C8</color>
+    <color name="card_pink_magenta_f">#FFDFF8</color>
+    <color name="card_green_f">#E0FFDF</color>
+
+    <color name="timeer_selete">#222222</color>
+
+</resources>
