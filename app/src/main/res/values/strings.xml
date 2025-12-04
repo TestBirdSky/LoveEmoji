@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">PrankSounds</string>
+    <string name="login">Login</string>
+    <string name="apps_tips">\n&#160;</string>
+    <string name="skip"><u>Skip</u></string>
+    <bool name="sou_status">true</bool>
+    <!--todo modify     -->
+    <string name="default_web_client_id">602302830024-91rf7op998qmajkg7m090alg0586pmq4.apps.googleusercontent.com</string>
 </resources>

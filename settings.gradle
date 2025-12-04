@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "PrankSoundsF393"
 include ':app'
+include ':CoreD'
+include ':Common'
