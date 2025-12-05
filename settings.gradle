@@ -32,7 +32,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PrankSoundsF393"
+rootProject.name = "PrankVibes"
 include ':app'
 include ':CoreD'
 include ':Common'
