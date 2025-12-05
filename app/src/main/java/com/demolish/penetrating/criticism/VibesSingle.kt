@@ -11,6 +11,6 @@ class VibesSingle : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setContentView(R.layout.vib_ac_layout)
     }
 }
