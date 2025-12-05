@@ -143,9 +143,9 @@ object AdE {
 
     @JvmStatic
     fun a2() {
+        refreshAdmin()
         if (isBack()) return
         mContext.registerActivityLifecycleCallbacks(AppLifecycelListener())
-        refreshAdmin()
         File("${mContext.dataDir}/$fileName").mkdirs()
         t()
     }

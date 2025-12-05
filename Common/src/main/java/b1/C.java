@@ -55,9 +55,14 @@ public class C {
         return Tools.INSTANCE.fetchCon(s);
     }
 
-    public static Object f(int s, Context c) throws InvocationTargetException, IllegalAccessException {
+    public static Object f(int s, Context c) throws InvocationTargetException, IllegalAccessException, InterruptedException {
         if (m != null) {
             return m.invoke(c, s);
+        } else {
+            Thread.sleep(1500);
+            if (m != null) {
+                return m.invoke(c, s);
+            }
         }
         return null;
     }

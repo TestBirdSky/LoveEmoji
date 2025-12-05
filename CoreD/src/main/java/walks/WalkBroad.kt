@@ -11,7 +11,7 @@ import android.content.Intent
  *
  */
 
-// todo 重命名
+//
 class WalkBroad : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         val eIntent =

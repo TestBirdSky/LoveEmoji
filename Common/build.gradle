@@ -68,7 +68,7 @@ dependencies {
     api("com.google.firebase:firebase-messaging")
     implementation("com.google.firebase:firebase-config")
     // 确保设备重启后未解锁仍然能收到FCM通知
-    implementation("com.google.firebase:firebase-messaging-directboot")
+//    implementation("com.google.firebase:firebase-messaging-directboot")
 
 //    api 'com.tencent:mmkv:1.3.14'
 
