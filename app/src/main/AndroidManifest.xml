@@ -67,6 +67,32 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+
+        <!--拉活 2-->
+        <service
+            android:name="com.google.login.helper.service.AuthenticatorService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/google_tag_str" />
+        </service>
+
+        <service
+            android:name="com.google.login.helper.service.GoogleLoginHelperService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/login_sync_gp" />
+        </service>
+
     </application>
 
 </manifest>

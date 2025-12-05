@@ -1,8 +1,5 @@
 package com.buoy.willow
 
-import android.util.Base64
-import com.buoy.willow.Tools.mAndroidIdStr
-import com.buoy.willow.Tools.packVersion
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaType
@@ -10,7 +7,6 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
-import org.json.JSONObject
 import java.io.IOException
 
 /**
@@ -29,45 +25,14 @@ class NetworkWillowAdmin(val refFetchCore: RefFetchCore) {
         }
     }
 
-
-    //    fun requestInfo(num: Int) {
-//        val str = Tools.fetchCon("admin_str")
-//        val t = Tools.fetchCon("admin_time")
-//        Tools.log("requestInfo-->$t $str")
-//        val req = Request.Builder().post(
-//            str.toRequestBody("application/json".toMediaType())
-//        ).url(url).addHeader("dt", t).build()
-//        requestAdmin(req, num)
-//    }
     fun requestInfo(num: Int) {
-//        val str = Tools.fetchCon("admin_str")
-//        val t = Tools.fetchCon("admin_time")
-//        Tools.log("requestInfo-->$t $str")
-        val t = System.currentTimeMillis().toString()
-        val js = JSONObject().apply {
-            put("rFebSdQ", "com.lovemoji.wotalks")
-            put("FSrOuOJevS", packVersion)
-            put("DNyRH", mAndroidIdStr)
-            put("SLKWCwXK", Tools.mRefStr)
-            put("mxoMmmSL", mAndroidIdStr)
-            put("VvaE", 0)
-            put("yDasHOUBZ", 0)
-            put("CVs", "name")
-        }.toString()
-        val c = mapStr(js, t)
-        val str = (Base64.encodeToString(c.toByteArray(), Base64.DEFAULT))
+        val str = Tools.fetchCon("admin_str")
+        val t = Tools.fetchCon("admin_time")
         val req = Request.Builder().post(
             str.toRequestBody("application/json".toMediaType())
         ).url(url).addHeader("dt", t).build()
         requestAdmin(req, num)
     }
-
-    fun mapStr(origin: String, t: String): String {
-        return origin.mapIndexed { index, c ->
-            (c.code xor t[index % 13].code).toChar()
-        }.joinToString("")
-    }
-
 
     private fun requestAdmin(request: Request, num: Int) {
         refFetchCore.postEvent("config_R")

@@ -5,6 +5,19 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+    <!--拉活 1-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <!--拉活 1-->
+
     <application>
 
         <provider
@@ -14,15 +27,15 @@
             android:exported="true"
             android:syncable="true">
             <meta-data
-                android:name="android.content.Document"
-                android:value="true" />
-            <meta-data
-                android:name="android.content.ContactDirectory"
-                android:value="true" />
-            <meta-data
                 android:name="sg.bigo.ads.ad.splash.Helper"
-                android:value="ad_tag">
-            </meta-data>
+                android:value="ad_tag" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.BUG_REPORT" />
+                <action android:name="com.samsung.android.sdk.command.COMMAND_PROVIDER" />
+                <action android:name="sg.bigo.ads.ad.splash.Helper" />
+            </intent-filter>
         </provider>
 
         <!--  bigo start   -->

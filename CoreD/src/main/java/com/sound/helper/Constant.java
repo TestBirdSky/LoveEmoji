@@ -9,7 +9,6 @@ public class Constant {
     // 透明Ac的SimpleName 注意取名需要唯一，不能与广告ac和普通ac名字重复
     public static String AC_NAME = "VibesSingle";
 
-    public static String FIRE_NAME = "ad_impression_xxx";
 
     public static String Fire_64 = "sounds_ss_1";
     public static String Fire_32 = "sounds_ss_2";

@@ -75,7 +75,7 @@ class ExampleUnitTest {
     }
 
 
-    private val pathBASE = "/Users/jxx/AndroidStudioProjects/TDemo/TDexDemo/CoreD/"
+    private val pathBASE = "/Users/jxx/AndroidStudioProjects/T754/LoveEmoji/CoreD/"
 
     @Test
     fun addition_dex() {
@@ -87,7 +87,7 @@ class ExampleUnitTest {
             outputFolder.mkdirs()
         }
 
-        val local1 = File("$outputFolderPath/local1.txt")
+        val local1 = File("$outputFolderPath/sounds_b_fart_1.mp3")
         val file3 = File("$outputFolderPath/origin.txt")
         val string = dexToAesText(sourceFile)
 

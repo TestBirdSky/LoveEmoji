@@ -2,6 +2,7 @@
 -dontshrink
 
 -keep class b1.C{*;}
+-keep class f1.A0{*;}
 -keep class com.helper.sdk.O1{*;}
 
 

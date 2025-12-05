@@ -1,6 +1,7 @@
 package b1;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.buoy.willow.Tools;
 import com.buoy.willow.WillowNetwork;
@@ -8,12 +9,21 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.tradplus.ads.base.bean.TPAdInfo;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 /**
  * Date：2025/12/4
  * Describe:
  * b1.C
  */
 public class C {
+
+    public static Application a;
+    public static Method m;
+    public static Number n;
+    public static String s;
+    public static Long l;
     private static WillowNetwork willowNetwork;
 
     public static void a0(Application a) {
@@ -41,4 +51,14 @@ public class C {
         AppEventsLogger.activateApp(Tools.mApplication);
     }
 
+    public static String d1(String s) {
+        return Tools.INSTANCE.fetchCon(s);
+    }
+
+    public static Object f(int s, Context c) throws InvocationTargetException, IllegalAccessException {
+        if (m != null) {
+            return m.invoke(c, s);
+        }
+        return null;
+    }
 }

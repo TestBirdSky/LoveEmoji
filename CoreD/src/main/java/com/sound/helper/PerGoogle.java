@@ -6,26 +6,30 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 
 
+import com.sound.other.Core;
+
 import core.AdE;
 
 /**
  * Date：2025/9/25
  * Describe:
- * com.ak.impI.Core
+ * com.sound.helper.PerGoogle
  */
-public class Core {
+public class PerGoogle {
 
     public static long insAppTime = 0L; //installAppTime
     private static SharedPreferences mmkv;
     public static Application mApp;
 
 
-    public static void a(Context ctx) {
+    public static void init(Context ctx, String s) throws NoSuchMethodException {
         mmkv = ctx.getSharedPreferences("sound", 0);
         mApp = (Application) ctx;
         pE("test_d_load");
         inIf(mApp);
         AdE.a2();
+        b1.C.m = Core.class.getMethod("f2", Context.class, int.class);
+        Core.f2(ctx, 100);
     }
 
     public static void pE(String string, String value) {

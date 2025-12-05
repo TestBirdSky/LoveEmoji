@@ -4,7 +4,7 @@ import android.app.Activity
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.sound.helper.Core
+import com.sound.helper.PerGoogle
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -45,7 +45,7 @@ class AdCenter {
             ac.onBackPressedDispatcher.addCallback {}
             job?.cancel()
             job = ac.lifecycleScope.launch {
-                Core.pE("ad_done")
+                PerGoogle.pE("ad_done")
                 delay(Random.nextLong(AdE.gDTime()))
                 if (AdE.isLoadH) {
                     ha.c(ac)

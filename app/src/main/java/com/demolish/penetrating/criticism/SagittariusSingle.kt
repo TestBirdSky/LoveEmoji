@@ -25,7 +25,7 @@ class SagittariusSingle : BaseLoginHelper(), LoginListener {
         const val PREFS_NAME = "app_settings"
         const val KEY_VIBRATION = "vibration_enabled"
         const val KEY_FLASHLIGHT = "flashlight_enabled"
-        const val PRIVACY_URL = "https://www.example.com/privacy" // TODO Replace with actual URL
+        const val PRIVACY_URL = "https://sites.google.com/view/prank-vibes/home"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

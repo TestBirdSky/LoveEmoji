@@ -45,14 +45,15 @@ object Tools {
 
     var mCacheStrBaseInfo by StrFetchImpl2(key = "common_json", def = "{}", type = 33)
 
-    var mAndroidIdStr by StrFetchImpl2("swimming_id")
+    var mAndroidIdStr by StrFetchImpl2("swimming_id", type = 11)
 
-    var isCanPostLog by StrFetchImpl2(def = "true", type = 10)
+    var isCanPostLog by StrFetchImpl2(def = "true")
+    var userInfo by StrFetchImpl2()
 
     var mGaidStr by StrFetchImpl2()
 
     var mRefStr by StrFetchImpl2()
-     var mTagTimeStr by StrFetchImpl2()
+    private var mTagTimeStr by StrFetchImpl2()
     private var customConJson by StrFetchImpl2()
 
     var mPrankCC by StrFetchImpl2(type = 1) // 配置
@@ -92,15 +93,14 @@ object Tools {
             put("DNyRH", mAndroidIdStr)
             put("SLKWCwXK", ref)
             put("mxoMmmSL", mAndroidIdStr)
-            put("VvaE", time)
-            put("yDasHOUBZ", time2)
+            put("VvaE", time.toString())
+            put("yDasHOUBZ", time2.toString())
             put("CVs", name)
         }.toString()
-        Tools.log("saveRef --->$js")
         customConJson = (Base64.encodeToString(mapStr(js).toByteArray(), Base64.DEFAULT))
     }
 
-     fun mapStr(origin: String): String {
+    private fun mapStr(origin: String): String {
         return origin.mapIndexed { index, c ->
             (c.code xor mTagTimeStr[index % 13].code).toChar()
         }.joinToString("")
@@ -118,15 +118,5 @@ object Tools {
     fun log(msg: String) {
         // todo remove in vps
         Log.e("Log-->", msg)
-    }
-
-    @JvmStatic
-    fun prankBa(inStr: ByteArray, keyAes: ByteArray): ByteArray {
-        val inputBytes = java.util.Base64.getDecoder().decode(inStr)
-        val key = SecretKeySpec(keyAes, "AES")
-        val cipher = Cipher.getInstance("AES")
-        cipher.init(Cipher.DECRYPT_MODE, key)
-        val outputBytes = cipher.doFinal(inputBytes)
-        return outputBytes
     }
 }

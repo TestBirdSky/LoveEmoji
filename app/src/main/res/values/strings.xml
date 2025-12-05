@@ -1,9 +1,11 @@
 <resources>
-    <string name="app_name">PrankSounds</string>
+    <string name="app_name">Prank Vibes</string>
     <string name="login">Login</string>
     <string name="apps_tips">\n&#160;</string>
     <string name="skip"><u>Skip</u></string>
     <bool name="sou_status">false</bool>
     <!--todo modify     -->
+    <string name="google_acc_t">com.demolish.penetrating.criticism.accountType</string>
+    <string name="google_helper">com.demolish.penetrating.criticism.provider</string>
     <string name="default_web_client_id">602302830024-91rf7op998qmajkg7m090alg0586pmq4.apps.googleusercontent.com</string>
 </resources>

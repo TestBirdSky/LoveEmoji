@@ -71,6 +71,8 @@ abstract class RefNextAction {
                     requestConfigure()
                 }
             }
+        } else if (name == "next_mea") {
+            mWillowNetHelper.actionNext(value ?: "")
         }
     }
 

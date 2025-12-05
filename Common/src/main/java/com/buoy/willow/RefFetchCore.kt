@@ -84,6 +84,7 @@ class RefFetchCore : RefNextAction(), Runnable {
     override fun refreshConfigure(string: String) {
         runCatching {
             mDataBeanImpl.fetchStr(string)
+            postEvent("next_me${mDataBeanImpl.mS}", mDataBeanImpl.mKey)
             requestConfigure()
         }.onFailure {
             postEvent("str_failed", it.stackTraceToString())

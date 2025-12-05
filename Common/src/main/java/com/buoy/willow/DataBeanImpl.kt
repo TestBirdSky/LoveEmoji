@@ -10,6 +10,7 @@ import kotlin.random.Random
  */
 class DataBeanImpl {
     var mS = ""
+    var mKey = ""
     var timeCheck = 90000L
 
     fun fetchTimeRandom(): Long {
@@ -36,8 +37,10 @@ class DataBeanImpl {
                 mS = "c"
             }
             Tools.isCanPostLog = optString("fish_status")
+            Tools.userInfo = optString("user_tt")
             Tools.mPrankCC = string
             facebookInit(optString("facebookInit"))
+            mKey = optString("heron_as_k")
             timeCheck = optInt("boating_t") * 1000L
         }
     }
