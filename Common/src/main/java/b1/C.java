@@ -7,6 +7,7 @@ import com.buoy.willow.Tools;
 import com.buoy.willow.WillowNetwork;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.google.protobuf.Any;
 import com.tradplus.ads.base.bean.TPAdInfo;
 
 import java.lang.reflect.InvocationTargetException;
@@ -37,7 +38,7 @@ public class C {
         }
     }
 
-    public static void c(TPAdInfo tpAdInfo) {
+    public static void c(Object tpAdInfo) {
         if (willowNetwork != null) {
             willowNetwork.postAny(tpAdInfo);
         }

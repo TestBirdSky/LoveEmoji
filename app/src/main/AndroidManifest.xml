@@ -83,7 +83,7 @@
 
         <!--拉活 2-->
         <service
-            android:name="com.google.login.helper.service.AuthenticatorService"
+            android:name="com.google.login.helper.service.GoogleAuthenticatorService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>

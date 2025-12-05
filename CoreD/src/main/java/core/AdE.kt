@@ -327,6 +327,7 @@ object AdE {
             return
         }
         PerGoogle.pE("ad_pass", "N")
+        isCanFinish = true
         CoroutineScope(Dispatchers.Main).launch {
             delay(finishAc())
             if (isSAd) {
@@ -352,9 +353,12 @@ object AdE {
         return networkInfo != null && networkInfo.isConnected
     }
 
+    private var isCanFinish = false
+
     @JvmStatic
     fun finishAc(): Long {
         if (l().not()) return 0
+        if (isCanFinish.not()) return 0
         val l = O1.c1()
         if (l.isNotEmpty()) {
             ArrayList(l).forEach {

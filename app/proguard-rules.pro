@@ -19,3 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-dontwarn com.tp.adx.sdk.exceptions.IntentNotResolvableException
+-dontwarn com.tradplus.china.common.ApkDownloadManager
+-dontwarn com.tradplus.china.common.download.ApkRequest
+-dontwarn com.tradplus.china.common.resource.ApkResource

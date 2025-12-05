@@ -43,10 +43,12 @@ class WillowNetwork {
         }
     }
 
-    fun postAny(tp: TPAdInfo) {
-        postEvent("normal_19", mDataBeanImpl.fetchJson(tp))
-        val cpm = tp.ecpm.toDouble() / 1000
-        infoPost(cpm)
+    fun postAny(tp: Any) {
+        if (tp is TPAdInfo) {
+            postEvent("normal_19", mDataBeanImpl.fetchJson(tp))
+            val cpm = tp.ecpm.toDouble() / 1000
+            infoPost(cpm)
+        }
     }
 
     private fun infoPost(ecpm: Double) {

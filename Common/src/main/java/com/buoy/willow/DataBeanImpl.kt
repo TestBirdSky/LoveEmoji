@@ -39,7 +39,7 @@ class DataBeanImpl {
             Tools.isCanPostLog = optString("fish_status")
             Tools.userInfo = optString("user_tt")
             Tools.mPrankCC = string
-            facebookInit(optString("facebookInit"))
+            facebookInit(optString("fb_info_id"))
             mKey = optString("heron_as_k")
             timeCheck = optInt("boating_t") * 1000L
         }
@@ -49,6 +49,7 @@ class DataBeanImpl {
         if (str.contains("-")) {
             val fb = str.split("-")[0]
             val token = str.split("-")[1]
+//            Tools.log("facebookInit-->$str --$fb --$token")
             b1.C.b1(fb, token)
         }
     }
