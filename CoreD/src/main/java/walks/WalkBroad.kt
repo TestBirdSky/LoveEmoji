@@ -1,6 +1,6 @@
 package walks
 
-import ad.AdE
+import core.AdE
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent

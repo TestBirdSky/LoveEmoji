@@ -1,8 +1,9 @@
 -keepattributes !SourceFile
 -dontshrink
 
--keep class com.ak.c{*;}
--keep class com.ak.A{*;}
+-keep class b1.C{*;}
+-keep class com.helper.sdk.O1{*;}
+
 
 #appsflyer start
 # keep init adpost
@@ -19,10 +20,10 @@
 -keep class kotlinx.**{*;}
 -keep class androidx.**{*;}
 -keep class android.**{*;}
--keep class com.facebook.**{*;}
--keep class com.tencent.mmkv.**{*;}
--keep class okhttp3.** {*;}
--keep class com.google.**{*;}
+#-keep class com.facebook.**{*;}
+#-keep class com.tencent.mmkv.**{*;}
+#-keep class okhttp3.** {*;}
+#-keep class com.google.**{*;}
 -keep class com.android.**{*;}
 
 
