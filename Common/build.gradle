@@ -116,7 +116,7 @@ dependencies {
     implementation "com.google.android.gms:play-services-ads-identifier:18.0.1"
 
     // new ad
-    api 'com.pangle.global:pag-sdk-m:7.8.7.0'
+    api 'com.pangle.global:pag-sdk-m:7.8.7.2'
     api 'com.pangle.global:applovin-adapter:13.3.1.2'
     api 'com.pangle.global:mintegral-adapter:16.9.91.1'
     api 'com.pangle.global:bigo-adapter:5.5.1.1'
