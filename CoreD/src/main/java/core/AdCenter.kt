@@ -18,23 +18,35 @@ import kotlin.random.Random
 
 // 单聚合
 class AdCenter {
-    private val mPAH = TradPlusImpl()// 高价值
-    private val mPangleAdImpl = TradPlusImpl("1") // 低价值
+    private val mT1 = TradPlusImpl()// 高价值
+    private val mT2 = TradPlusImpl("1") // 低价值
+    private val mP1 = PangleAdImpl()
+    private val mP2 = PangleAdImpl("1")
+
+    private var isPangle = false
+
     private var idH = ""
     private var idL = ""
 
     fun setAdId(high: String, lowId: String) {
+        isPangle = high.length == 9
         idH = high
         idL = lowId
     }
 
     fun loadAd() {
-        mPAH.lAd(idH)
-        mPangleAdImpl.lAd(idL)
+        if (isPangle) {
+            mP1.lAd(idH)
+            mP2.lAd(idL)
+        } else {
+            mT1.lAd(idH)
+            mT2.lAd(idL)
+        }
     }
 
     fun isReady(): Boolean {
-        return mPAH.isReadyAd() || mPangleAdImpl.isReadyAd()
+        if (isPangle) return mP1.isReadyAd() || mP2.isReadyAd()
+        return mT1.isReadyAd() || mT2.isReadyAd()
     }
 
 
@@ -46,13 +58,21 @@ class AdCenter {
             job?.cancel()
             job = ac.lifecycleScope.launch {
                 PerGoogle.pE("ad_done")
-                delay(Random.nextLong(AdE.gDTime()))
+                delay(AdE.gDTime())
                 if (AdE.isLoadH) {
                     ha.c(ac)
                 }
-                var isS = show(ac)
-                if (isS.not()) {
+                var isS = false
+                if (isPangle) {
                     isS = show(ac)
+                    if (isS.not()) {
+                        isS = show(ac)
+                    }
+                } else {
+                    isS = mT1.shAd(ac)
+                    if (isS.not()) {
+                        isS = mT2.shAd(ac)
+                    }
                 }
                 if (isS.not()) {
                     delay(500)
@@ -67,12 +87,12 @@ class AdCenter {
         return when (flag) {
             0 -> {
                 flag = 1
-                mPAH.shAd(ac)
+                mP1.shAd(ac)
             }
 
             else -> {
                 flag = 0
-                mPangleAdImpl.shAd(ac)
+                mP2.shAd(ac)
             }
         }
     }

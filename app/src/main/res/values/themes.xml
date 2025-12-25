@@ -8,7 +8,7 @@
     <style name="Theme.PrankSounds" parent="Base.Theme.PrankSounds" />
 
     <style name="App_styles" parent="Base_styles">
-        <item name="android:backgroundDimEnabled">false</item>
+        <!--        <item name="android:backgroundDimEnabled">false</item>-->
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>

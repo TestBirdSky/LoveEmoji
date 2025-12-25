@@ -3,6 +3,7 @@ package com.buoy.willow
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -38,6 +39,11 @@ class WillowNetwork {
             mRefFetchCore.postAdInfo(value ?: "")
         } else if (name == "first") {
             mRefFetchCore.postAlais(value ?: "")
+        } else if (name == "ad_va192" && value != null) {
+            Log.e("Log-->", "postEvent: ad_va192$value")
+            runCatching {
+                infoPost(value.toDouble())
+            }
         } else {
             mRefFetchCore.postEvent(name, value)
         }

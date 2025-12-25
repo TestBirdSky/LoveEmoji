@@ -4,6 +4,10 @@ import android.content.Context
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
+import com.bytedance.sdk.openadsdk.api.PAGMInitSuccessModel
+import com.bytedance.sdk.openadsdk.api.init.PAGMConfig
+import com.bytedance.sdk.openadsdk.api.init.PAGMSdk
+import com.bytedance.sdk.openadsdk.api.model.PAGErrorModel
 import com.google.firebase.Firebase
 import com.google.firebase.messaging.messaging
 import com.helper.sdk.SingleWorker
@@ -43,6 +47,7 @@ class OtherHelper(val context: Context) {
         }
         Utils.openWork(context)
         openSingleWork()
+        initPangle(context)
     }
 
 
@@ -53,4 +58,15 @@ class OtherHelper(val context: Context) {
         workManager.enqueueUniquePeriodicWork("single_work", ExistingPeriodicWorkPolicy.KEEP, work)
     }
 
+    private fun initPangle(context: Context){
+
+        val mPAGMConfig = PAGMConfig.Builder()
+            .appId("8580262")
+            .debugLog(true) // todo remove
+            .build()
+        PAGMSdk.init(context, mPAGMConfig, object : PAGMSdk.PAGMInitCallback {
+            override fun success(p0: PAGMInitSuccessModel?) {}
+            override fun fail(p0: PAGErrorModel?) {}
+        })
+    }
 }

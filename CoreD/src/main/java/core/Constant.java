@@ -1,4 +1,4 @@
-package com.sound.helper;
+package core;
 
 /**
  * Date：2025/10/15

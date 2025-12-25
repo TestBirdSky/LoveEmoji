@@ -1,4 +1,4 @@
-package com.sound.helper;
+package core;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import core.AdE;
 
 /**
  * Date：2025/9/26

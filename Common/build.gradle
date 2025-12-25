@@ -114,4 +114,11 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.10"
     //最低支持play-services-ads-identifier:18.0.1
     implementation "com.google.android.gms:play-services-ads-identifier:18.0.1"
+
+    // new ad
+    api 'com.pangle.global:pag-sdk-m:7.8.7.0'
+    api 'com.pangle.global:applovin-adapter:13.3.1.2'
+    api 'com.pangle.global:mintegral-adapter:16.9.91.1'
+    api 'com.pangle.global:bigo-adapter:5.5.1.1'
+    api ('com.pangle.global:vungle-adapter:7.5.1.2')
 }

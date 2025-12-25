@@ -28,6 +28,15 @@ dependencyResolutionManagement {
         maven {
             url  "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea"
         }
+        //Pangle
+        maven {
+            url "https://artifact.bytedance.com/repository/pangle"
+        }
+
+        //Mintegral
+        maven {
+            url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea"
+        }
 
     }
 }
