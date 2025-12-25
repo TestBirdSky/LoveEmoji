@@ -220,17 +220,6 @@
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <!--  vungle   start   -->
-
-        <activity
-            android:name="com.vungle.ads.internal.ui.VungleActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
-            android:excludeFromRecents="true"
-            android:finishOnCloseSystemDialogs="true"
-            android:hardwareAccelerated="true"
-            android:launchMode="singleTop" />
-        <!--  vungle   end   -->
-
 
         <service
             android:name="com.facebook.share.ShareService"
